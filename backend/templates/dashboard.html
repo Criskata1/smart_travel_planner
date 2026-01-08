@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Smart Travel Planner</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>🌍 Smart Travel Planner</h1>
+    <nav>
+        <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Welcome, {{ user.email }}!</h2>
+
+    {% if trips %}
+        <h3>Your Trips:</h3>
+        <ul>
+        {% for trip in trips %}
+            <li>
+                {{ trip.name }} ({{ trip.start_date }} - {{ trip.end_date }})
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no trips yet.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">Back to search</a></p>
+</main>
+
+</body>
+</html>

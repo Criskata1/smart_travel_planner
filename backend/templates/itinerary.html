@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel Planner - Itinerary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+<header class="app-header">
+    <h1>🌍 Smart Travel Planner</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Search</a>
+        <a href="{{ url_for('itinerary') }}" class="active">Itinerary Builder</a>
+    </nav>
+</header>
+
+<main>
+    <section class="itinerary-section">
+        <h2>Create Your Trip Plan</h2>
+        <p class="subtitle">Drag destinations into your daily itinerary and see them on the map.</p>
+
+        <!-- Controls: City + Filter -->
+        <div class="itinerary-controls">
+            <label for="city-select-itinerary">Choose a city:</label>
+            <select id="city-select-itinerary">
+                <option value="">Choose a city</option>
+            </select>
+
+            <label for="type-filter">Filter by type:</label>
+            <select id="type-filter">
+                <option value="">All Types</option>
+                <option value="Museum">Museum</option>
+                <option value="Park">Park</option>
+                <option value="Landmark">Landmark</option>
+                <option value="Restaurant">Restaurant</option>
+            </select>
+
+            <button id="load-destinations-btn">Load Destinations</button>
+        </div>
+
+        <div class="itinerary-container">
+            <!-- Available Destinations -->
+            <div class="destinations-panel">
+                <h3>Available Destinations</h3>
+                <div id="available-destinations" class="cards-container"></div>
+            </div>
+
+            <!-- Itinerary Days -->
+            <div class="plan-panel">
+                <h3>Your Itinerary</h3>
+                <div id="itinerary-days" class="itinerary-days">
+                    <div class="day-card" data-day="1">
+                        <h4>Day 1</h4>
+                        <div class="day-destinations" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div class="day-card" data-day="2">
+                        <h4>Day 2</h4>
+                        <div class="day-destinations" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div class="day-card" data-day="3">
+                        <h4>Day 3</h4>
+                        <div class="day-destinations" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div id="map" style="height: 450px; margin-top: 20px;"></div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Smart Travel Planner. All Rights Reserved.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/itinerary.js') }}"></script>
